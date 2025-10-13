@@ -1,0 +1,44 @@
+services:
+  php-env:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./src:/var/www/html
+    ports:
+      - "9000:80"
+    depends_on:
+      - mariadb
+    networks:
+      - devnet
+
+  mariadb:
+    image: mariadb:10.4.32 # stable LTS version
+    restart: always
+    environment:
+      MARIADB_ROOT_PASSWORD: root
+      MARIADB_DATABASE: devdb # optional: auto-create a DB
+      MARIADB_USER: devuser # optional: create a non-root user
+      MARIADB_PASSWORD: devpass
+    ports:
+      - "3306:3306" # optional: access from host tools
+    networks:
+      - devnet
+
+  phpmyadmin:
+    image: phpmyadmin:latest
+    restart: always
+    ports:
+      - "9001:80"
+    environment:
+      PMA_HOST: mariadb
+      PMA_USER: root
+      PMA_PASSWORD: root
+    depends_on:
+      - mariadb
+    networks:
+      - devnet
+
+networks:
+  devnet:
+    driver: bridge
