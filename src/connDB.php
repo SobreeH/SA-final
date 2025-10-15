@@ -1,9 +1,9 @@
 <?php
 // PHP file to establish a connection to the MariaDB server.
 // Configuration matches the typical setup for this environment.
-$servername = "mariadb";
+$servername = "localhost";
 $username = "root";
-$password = "root";    // Must match MYSQL_ROOT_PASSWORD
+$password = "";    // Must match MYSQL_ROOT_PASSWORD
 $database = "livestockdb"; // New database name
 
 // Create connection
