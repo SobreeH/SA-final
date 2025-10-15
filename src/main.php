@@ -85,8 +85,7 @@ if (empty($heroes)) {
     </form>
 
     <div class="d-flex">
-      <a href="login.php" class="btn btn-light me-2">ล็อกอิน</a>
-      <a href="register.php" class="btn btn-outline-light">สมัครสมาชิก</a>
+      <a href="login.php" class="btn btn-light me-2">ล็อกอิน(คนภายใน)</a>
     </div>
   </div>
 </nav>
@@ -141,7 +140,8 @@ if (empty($heroes)) {
             <p class="mb-1">ชนิด: <?= htmlspecialchars($row['type']) ?></p>
             <p class="mb-1">สายพันธุ์: <?= htmlspecialchars($row['breed']) ?></p>
             <p class="mb-3">น้ำหนัก: <?= htmlspecialchars($row['weight']) ?> กก.</p>
-            <a href="#" class="btn btn-success mt-auto">รายละเอียด</a>
+           <a href="detail.php?livestock_id=<?= (int)$row['livestock_id'] ?>" 
+            class="btn btn-success mt-auto">รายละเอียด</a>
           </div>
         </div>
       </div>

@@ -9,7 +9,9 @@ $username = "root";
 $password = "root";
 $database = "livestockdb";
 
+// ----------------------
 // Connect without DB first
+// ----------------------
 $conn = new mysqli($servername, $username, $password);
 if ($conn->connect_error) die("Connection failed: " . $conn->connect_error);
 
@@ -65,13 +67,14 @@ CREATE TABLE IF NOT EXISTS Customer (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 ";
 
-// Livestock
+// Livestock (with gender)
 $tables['Livestock'] = "
 CREATE TABLE IF NOT EXISTS Livestock (
     livestock_id INT AUTO_INCREMENT PRIMARY KEY,
     tag_number VARCHAR(100) NOT NULL UNIQUE,
     type ENUM('cow','chicken','goat') NOT NULL,
     breed VARCHAR(100),
+    gender ENUM('male','female') DEFAULT 'female',
     weight DECIMAL(10,2) DEFAULT NULL,
     status ENUM('available','sold') NOT NULL DEFAULT 'available',
     date_added DATE NOT NULL DEFAULT (CURRENT_DATE),
@@ -97,7 +100,7 @@ CREATE TABLE IF NOT EXISTS Supply (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 ";
 
-// Sales (POS style)
+// Sales
 $tables['Sales'] = "
 CREATE TABLE IF NOT EXISTS Sales (
     sale_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -150,7 +153,7 @@ foreach ($tables as $name => $sql) {
 }
 
 // ================================
-// Insert Dummy Data (10+ each)
+// Insert Dummy Data
 // ================================
 
 // Farmers
@@ -177,32 +180,33 @@ function generateTag($type,$num){
     return "TAG$prefix".str_pad($num,3,'0',STR_PAD_LEFT);
 }
 
-// Livestock
+// Livestock dummy data with gender
 $livestock_data = [
-    ['cow','Angus',500.5,'available','https://placehold.co/600x400?text=Cow'],
-    ['cow','Holstein',610.8,'available','https://placehold.co/600x400?text=Cow'],
-    ['cow','Brahman',520.1,'available','https://placehold.co/600x400?text=Cow'],
-    ['cow','Charolais',705.25,'sold','https://placehold.co/600x400?text=Cow'],
-    ['cow','Angus',580,'available','https://placehold.co/600x400?text=Cow'],
-    ['chicken','Leghorn',2.1,'available','https://placehold.co/600x400?text=Chicken'],
-    ['chicken','Rhode Island Red',2.45,'available','https://placehold.co/600x400?text=Chicken'],
-    ['chicken','Plymouth Rock',2.8,'sold','https://placehold.co/600x400?text=Chicken'],
-    ['goat','Boer',52.3,'available','https://placehold.co/600x400?text=Goat'],
-    ['goat','Kiko',48.75,'sold','https://placehold.co/600x400?text=Goat']
+    ['cow','Angus','male',500.5,'available','https://placehold.co/600x400?text=Cow'],
+    ['cow','Holstein','female',610.8,'available','https://placehold.co/600x400?text=Cow'],
+    ['cow','Brahman','male',520.1,'available','https://placehold.co/600x400?text=Cow'],
+    ['cow','Charolais','female',705.25,'sold','https://placehold.co/600x400?text=Cow'],
+    ['cow','Angus','male',580,'available','https://placehold.co/600x400?text=Cow'],
+    ['chicken','Leghorn','female',2.1,'available','https://placehold.co/600x400?text=Chicken'],
+    ['chicken','Rhode Island Red','male',2.45,'available','https://placehold.co/600x400?text=Chicken'],
+    ['chicken','Plymouth Rock','female',2.8,'sold','https://placehold.co/600x400?text=Chicken'],
+    ['goat','Boer','male',52.3,'available','https://placehold.co/600x400?text=Goat'],
+    ['goat','Kiko','female',48.75,'sold','https://placehold.co/600x400?text=Goat']
 ];
 
 $index_cow=1; $index_chicken=1; $index_goat=1;
 foreach($livestock_data as $l){
-    list($type,$breed,$weight,$status,$image) = $l;
+    list($type,$breed,$gender,$weight,$status,$image) = $l;
     switch($type){
         case 'cow': $tag=generateTag($type,$index_cow++); break;
         case 'chicken': $tag=generateTag($type,$index_chicken++); break;
         case 'goat': $tag=generateTag($type,$index_goat++); break;
     }
-    $stmt=$conn->prepare("INSERT IGNORE INTO Livestock (tag_number,type,breed,weight,status,image) VALUES (?,?,?,?,?,?)");
-    $stmt->bind_param("ssdsss",$tag,$type,$breed,$weight,$status,$image);
+    $stmt=$conn->prepare("INSERT IGNORE INTO Livestock (tag_number,type,breed,gender,weight,status,image) VALUES (?,?,?,?,?,?,?)");
+    $stmt->bind_param("sssdsss",$tag,$type,$breed,$gender,$weight,$status,$image);
     $stmt->execute();
 }
+
 // Supplies dummy data (10 entries)
 for($i=1;$i<=10;$i++){
     $conn->query("INSERT INTO Supply (supply_name,category,description,quantity,unit,updated_by) 
@@ -228,5 +232,7 @@ for($i=1;$i<=10;$i++){
 }
 
 echo "<br>Dummy data inserted successfully!";
+echo "<script>setTimeout(() => { window.location.href = 'main.php'; }, 1500);</script>";
+
 $conn->close();
 ?>
