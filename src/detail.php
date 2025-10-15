@@ -92,11 +92,22 @@ $breed = $sb->get_result();
           <span class="badge <?= ($item['status']==='available' ? 'bg-success' : 'bg-secondary') ?>"><?= h($item['status']) ?></span>
         </div>
         <dl class="row meta mt-2">
-          <dt class="col-sm-4">ชนิด</dt><dd class="col-sm-8 text-capitalize"><?= h($item['type']) ?></dd>
-          <dt class="col-sm-4">สายพันธุ์</dt><dd class="col-sm-8"><?= h($item['breed']) ?></dd>
-          <dt class="col-sm-4">น้ำหนัก</dt><dd class="col-sm-8"><?= h($item['weight']) ?> กก.</dd>
-          <dt class="col-sm-4">เพิ่มเมื่อ</dt><dd class="col-sm-8"><?= h($item['date_added']) ?></dd>
-        </dl>
+  <dt class="col-sm-4">ชนิด</dt>
+  <dd class="col-sm-8 text-capitalize"><?= h($item['type']) ?></dd>
+
+  <dt class="col-sm-4">สายพันธุ์</dt>
+  <dd class="col-sm-8"><?= h($item['breed']) ?></dd>
+
+  <dt class="col-sm-4">เพศ</dt>
+  <dd class="col-sm-8 text-capitalize"><?= h($item['gender'] ?? 'ไม่ระบุ') ?></dd>
+
+  <dt class="col-sm-4">น้ำหนัก</dt>
+  <dd class="col-sm-8"><?= h($item['weight']) ?> กก.</dd>
+
+  <dt class="col-sm-4">เพิ่มเมื่อ</dt>
+  <dd class="col-sm-8"><?= h($item['date_added']) ?></dd>
+</dl>
+
 
         <?php if($farmer): ?>
           <div class="alert alert-success d-flex align-items-center" role="alert">

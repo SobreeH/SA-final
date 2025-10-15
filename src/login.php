@@ -46,6 +46,8 @@ if (isset($_SESSION['role'])) {
                     </div>
                     <button type="submit" class="btn btn-primary w-100">Login</button>
                 </form>
+                <a href="main.php" class="btn btn-secondary w-100 mt-3">Go to Main Page</a>
+
             </div>
         </div>
     </div>

@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS Customer (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 ";
 
-// Livestock (with gender)
+// Livestock
 $tables['Livestock'] = "
 CREATE TABLE IF NOT EXISTS Livestock (
     livestock_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -156,31 +156,49 @@ foreach ($tables as $name => $sql) {
 // Insert Dummy Data
 // ================================
 
-// Farmers
-for($i=1;$i<=10;$i++){
-    $conn->query("INSERT INTO Farmer (username,password,name,contact) 
-        VALUES ('farmer$i','1234','Farmer $i','08123456".str_pad($i,2,'0',STR_PAD_LEFT)."')");
+// --- Farmers ---
+$farmerStmt = $conn->prepare("INSERT IGNORE INTO Farmer (username,password,name,contact) VALUES (?,?,?,?)");
+for($i=1;$i<=12;$i++){
+    $username = "farmer$i";
+    $password = "1234";
+    $name = "Farmer $i";
+    $contact = "08123456".str_pad($i,2,'0',STR_PAD_LEFT);
+    $farmerStmt->bind_param("ssss",$username,$password,$name,$contact);
+    $farmerStmt->execute();
 }
+$farmerStmt->close();
 
-// Veterinarians
-for($i=1;$i<=10;$i++){
-    $conn->query("INSERT INTO Veterinarian (vet_name,email,password,institution,contact) 
-        VALUES ('Dr. Vet$i','vet$i@example.com','abcd','Clinic $i','0823456".str_pad($i,2,'0',STR_PAD_LEFT)."')");
+// --- Veterinarians ---
+$vetStmt = $conn->prepare("INSERT IGNORE INTO Veterinarian (vet_name,email,password,institution,contact) VALUES (?,?,?,?,?)");
+$vetData = [
+    ['Dr. Vet1','vet1@example.com','abcd','Clinic 1','0823456001'],
+    ['Dr. Vet2','vet2@example.com','abcd','Clinic 2','0823456002'],
+    ['Dr. Smith','smith@example.com','abcd','Central Clinic','0823456789'],
+    ['Dr. Jones','jones@example.com','abcd','West Clinic','0823456790']
+];
+foreach($vetData as $v){
+    $vetStmt->bind_param("sssss",$v[0],$v[1],$v[2],$v[3],$v[4]);
+    $vetStmt->execute();
 }
+$vetStmt->close();
 
-// Customers
+// --- Customers ---
+$customerStmt = $conn->prepare("INSERT IGNORE INTO Customer (customer_name,contact,email) VALUES (?,?,?)");
 for($i=1;$i<=10;$i++){
-    $conn->query("INSERT INTO Customer (customer_name,contact,email) 
-        VALUES ('Customer $i','0834567".str_pad($i,3,'0',STR_PAD_LEFT)."','customer$i@example.com')");
+    $name = "Customer $i";
+    $contact = "0834567".str_pad($i,3,'0',STR_PAD_LEFT);
+    $email = "customer$i@example.com";
+    $customerStmt->bind_param("sss",$name,$contact,$email);
+    $customerStmt->execute();
 }
+$customerStmt->close();
 
-// Function to generate TAG number
+// --- Livestock ---
 function generateTag($type,$num){
     $prefix = ['cow'=>'M','chicken'=>'C','goat'=>'G'][$type];
     return "TAG$prefix".str_pad($num,3,'0',STR_PAD_LEFT);
 }
 
-// Livestock dummy data with gender
 $livestock_data = [
     ['cow','Angus','male',500.5,'available','https://placehold.co/600x400?text=Cow'],
     ['cow','Holstein','female',610.8,'available','https://placehold.co/600x400?text=Cow'],
@@ -190,48 +208,62 @@ $livestock_data = [
     ['chicken','Leghorn','female',2.1,'available','https://placehold.co/600x400?text=Chicken'],
     ['chicken','Rhode Island Red','male',2.45,'available','https://placehold.co/600x400?text=Chicken'],
     ['chicken','Plymouth Rock','female',2.8,'sold','https://placehold.co/600x400?text=Chicken'],
+    ['chicken','Sussex','female',2.3,'available','https://placehold.co/600x400?text=Chicken'],
     ['goat','Boer','male',52.3,'available','https://placehold.co/600x400?text=Goat'],
-    ['goat','Kiko','female',48.75,'sold','https://placehold.co/600x400?text=Goat']
+    ['goat','Kiko','female',48.75,'sold','https://placehold.co/600x400?text=Goat'],
+    ['goat','Saanen','male',55,'available','https://placehold.co/600x400?text=Goat'],
+    ['cow','Simmental','female',600,'available','https://placehold.co/600x400?text=Cow']
 ];
 
-$index_cow=1; $index_chicken=1; $index_goat=1;
+$index_cow = 1; $index_chicken = 1; $index_goat = 1;
+$livestockStmt = $conn->prepare("INSERT IGNORE INTO Livestock (tag_number,type,breed,gender,weight,status,image) VALUES (?,?,?,?,?,?,?)");
+
 foreach($livestock_data as $l){
     list($type,$breed,$gender,$weight,$status,$image) = $l;
     switch($type){
-        case 'cow': $tag=generateTag($type,$index_cow++); break;
-        case 'chicken': $tag=generateTag($type,$index_chicken++); break;
-        case 'goat': $tag=generateTag($type,$index_goat++); break;
+        case 'cow': $tag = generateTag($type,$index_cow++); break;
+        case 'chicken': $tag = generateTag($type,$index_chicken++); break;
+        case 'goat': $tag = generateTag($type,$index_goat++); break;
     }
-    $stmt=$conn->prepare("INSERT IGNORE INTO Livestock (tag_number,type,breed,gender,weight,status,image) VALUES (?,?,?,?,?,?,?)");
-    $stmt->bind_param("sssdsss",$tag,$type,$breed,$gender,$weight,$status,$image);
-    $stmt->execute();
+    $livestockStmt->bind_param("ssssdss",$tag,$type,$breed,$gender,$weight,$status,$image);
+    $livestockStmt->execute();
 }
+$livestockStmt->close();
 
-// Supplies dummy data (10 entries)
+// --- Supplies ---
+$supplyStmt = $conn->prepare("INSERT IGNORE INTO Supply (supply_name,category,description,quantity,unit,updated_by) VALUES (?,?,?,?,?,?)");
+$supplies = [
+    ['Supply 1','feed','Description 1',100,'kg',1],
+    ['Supply 2','feed','Description 2',100,'kg',2],
+    ['Vitamin Mix','feed','Daily vitamin for livestock',50,'kg',1],
+    ['Dewormer','medicine','General anti-parasite',30,'bottle',2]
+];
+foreach($supplies as $s){
+    $supplyStmt->bind_param("sssdis",$s[0],$s[1],$s[2],$s[3],$s[4],$s[5]);
+    $supplyStmt->execute();
+}
+$supplyStmt->close();
+
+// --- Sales ---
 for($i=1;$i<=10;$i++){
-    $conn->query("INSERT INTO Supply (supply_name,category,description,quantity,unit,updated_by) 
-        VALUES ('Supply $i','feed','Description $i',100,'kg',".($i%10+1).")");
+    $customer_id = ($i%2==0)?$i:"NULL";
+    $price = 1000 + $i;
+    $conn->query("INSERT IGNORE INTO Sales (customer_id,livestock_id,price) VALUES ($customer_id,$i,$price)");
 }
 
-// Sales (POS-style)
+// --- Health Records ---
 for($i=1;$i<=10;$i++){
-    $customer = ($i%2==0)?$i:"NULL"; // some walk-in sales
-    $conn->query("INSERT INTO Sales (customer_id,livestock_id,price) VALUES ($customer,$i,".(1000+$i).")");
+    $vet_id = ($i%4)+1;
+    $conn->query("INSERT IGNORE INTO Health_Records (livestock_id,vet_id,treatment_date,treatment) VALUES ($i,$vet_id,'2025-10-01','Routine check $i')");
 }
 
-// Health Records
+// --- Breeding Records ---
 for($i=1;$i<=10;$i++){
-    $conn->query("INSERT INTO Health_Records (livestock_id,vet_id,treatment_date,treatment) 
-        VALUES ($i,".($i%10+1).",'2025-10-01','Routine check $i')");
+    $vet_id = ($i%4)+1;
+    $conn->query("INSERT IGNORE INTO Breeding_Records (livestock_id,vet_id,date_inseminated,pregnancy_result) VALUES ($i,$vet_id,'2025-10-01','unknown')");
 }
 
-// Breeding Records
-for($i=1;$i<=10;$i++){
-    $conn->query("INSERT INTO Breeding_Records (livestock_id,vet_id,date_inseminated,pregnancy_result) 
-        VALUES ($i,".($i%10+1).",'2025-10-01','unknown')");
-}
-
-echo "<br>Dummy data inserted successfully!";
+echo "<br>Database setup and dummy data inserted successfully!";
 echo "<script>setTimeout(() => { window.location.href = 'main.php'; }, 1500);</script>";
 
 $conn->close();
