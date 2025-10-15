@@ -23,12 +23,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_sale'])) {
         $customer_id = $conn->insert_id;
     }
 
-    // Generate invoice number
-    $invoice_number = "INV".time().rand(100,999);
-
     // Insert sale
-    $sql = "INSERT INTO Sales (customer_id, livestock_id, price, currency, invoice_number) 
-            VALUES ($customer_id,$livestock_id,$price,'$currency','$invoice_number')";
+    $sql = "INSERT INTO Sales (customer_id, livestock_id, price, currency) 
+            VALUES ($customer_id,$livestock_id,$price,'$currency')";
     if ($conn->query($sql) === TRUE) {
         $conn->query("UPDATE Livestock SET status='sold' WHERE livestock_id=$livestock_id");
         $msg = "Sale recorded successfully!";
@@ -41,9 +38,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['add_sale'])) {
 $livestock_list = $conn->query("SELECT livestock_id, tag_number FROM Livestock WHERE status='available'");
 
 // Fetch all sales
-$sales = $conn->query("SELECT s.sale_id, c.customer_name, l.tag_number, s.price, s.currency, s.payment_status, s.date_purchase
+$sales = $conn->query("SELECT s.sale_id, c.customer_name, l.tag_number, s.price, s.currency, s.date_purchase
                        FROM Sales s
-                       JOIN Customer c ON s.customer_id = c.customer_id
+                       LEFT JOIN Customer c ON s.customer_id = c.customer_id
                        JOIN Livestock l ON s.livestock_id = l.livestock_id
                        ORDER BY s.date_purchase DESC");
 ?>
@@ -58,6 +55,8 @@ $sales = $conn->query("SELECT s.sale_id, c.customer_name, l.tag_number, s.price,
 <div class="container mt-4">
     <h2>Record Livestock Sale</h2>
     <?php if($msg) echo "<div class='alert alert-info'>$msg</div>"; ?>
+
+    <div><a href="farmer_dashboard.php">Back</a></div>
 
     <div class="card mb-4">
         <div class="card-header">Add New Sale</div>
@@ -100,18 +99,17 @@ $sales = $conn->query("SELECT s.sale_id, c.customer_name, l.tag_number, s.price,
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
-                <th>ID</th><th>Customer</th><th>Livestock</th><th>Price</th><th>Currency</th><th>Status</th><th>Date</th>
+                <th>ID</th><th>Customer</th><th>Livestock</th><th>Price</th><th>Currency</th><th>Date</th>
             </tr>
         </thead>
         <tbody>
             <?php while($row = $sales->fetch_assoc()): ?>
             <tr>
                 <td><?php echo $row['sale_id']; ?></td>
-                <td><?php echo htmlspecialchars($row['customer_name']); ?></td>
+                <td><?php echo htmlspecialchars($row['customer_name'] ?? 'Walk-in'); ?></td>
                 <td><?php echo htmlspecialchars($row['tag_number']); ?></td>
                 <td><?php echo $row['price']; ?></td>
                 <td><?php echo htmlspecialchars($row['currency']); ?></td>
-                <td><?php echo ucfirst($row['payment_status']); ?></td>
                 <td><?php echo $row['date_purchase']; ?></td>
             </tr>
             <?php endwhile; ?>

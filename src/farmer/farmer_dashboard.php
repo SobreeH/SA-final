@@ -16,6 +16,7 @@ require_role('farmer');
     <ul class="list-group mt-3">
         <li class="list-group-item"><a href="farmer_livestock.php">Manage Livestock</a></li>
         <li class="list-group-item"><a href="farmer_supply.php">Manage Supplies</a></li>
+        <li class="list-group-item"><a href="farmer_sales.php">Manage Sales</a></li>
         <li class="list-group-item"><a href="../logout.php">Logout</a></li>
     </ul>
 </div>

@@ -35,6 +35,9 @@ $result = $conn->query("SELECT * FROM Supply WHERE updated_by=".$_SESSION['user_
     <h2>Manage Supplies</h2>
     <?php if($msg) echo "<div class='alert alert-info'>$msg</div>"; ?>
 
+    <div>
+    <a href="farmer_dashboard.php" >back</a>
+</div>
     <div class="card mb-4">
         <div class="card-header">Add New Supply</div>
         <div class="card-body">
@@ -75,7 +78,7 @@ $result = $conn->query("SELECT * FROM Supply WHERE updated_by=".$_SESSION['user_
     <table class="table table-bordered table-striped">
         <thead>
             <tr>
-                <th>ID</th><th>Name</th><th>Category</th><th>Description</th><th>Qty</th><th>Unit</th><th>Reorder Level</th>
+                <th>ID</th><th>Name</th><th>Category</th><th>Description</th><th>Qty</th><th>Unit</th>
             </tr>
         </thead>
         <tbody>
@@ -87,7 +90,6 @@ $result = $conn->query("SELECT * FROM Supply WHERE updated_by=".$_SESSION['user_
                 <td><?php echo htmlspecialchars($row['description']); ?></td>
                 <td><?php echo $row['quantity']; ?></td>
                 <td><?php echo htmlspecialchars($row['unit']); ?></td>
-                <td><?php echo $row['reorder_level']; ?></td>
             </tr>
             <?php endwhile; ?>
         </tbody>

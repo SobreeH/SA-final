@@ -36,7 +36,9 @@ $livestock_list = $conn->query("SELECT livestock_id, tag_number FROM Livestock W
 <div class="container mt-4">
     <h2>Breeding Records</h2>
     <?php if ($msg) echo "<div class='alert alert-info'>$msg</div>"; ?>
-
+<div>
+    <a href="vet_dashboard.php" >back</a>
+</div>
     <div class="card mb-4">
         <div class="card-header">Add New Breeding Record</div>
         <div class="card-body">

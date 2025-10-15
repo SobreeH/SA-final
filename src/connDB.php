@@ -1,9 +1,9 @@
 <?php
 // PHP file to establish a connection to the MariaDB server.
 // Configuration matches the typical setup for this environment.
-$servername = "mariadb"; // Service name in docker-compose.yaml
+$servername = "mariadb";
 $username = "root";
-$password = "root";      // Must match MYSQL_ROOT_PASSWORD
+$password = "root";    // Must match MYSQL_ROOT_PASSWORD
 $database = "livestockdb"; // New database name
 
 // Create connection
@@ -18,5 +18,5 @@ if ($conn->connect_error) {
 // Set character set to support Thai/UTF-8 data
 $conn->set_charset("utf8mb4");
 
-// Note: We skip the "Connected successfully!" echo to prevent breaking HTML output
+// Note: We skip the "  Connected successfully!" echo to prevent breaking HTML output
 ?>
