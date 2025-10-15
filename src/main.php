@@ -114,7 +114,7 @@ if (empty($heroes)) {
                                         class="text-white nav-link px-2 hover:!text-[#7bc05a] transition-colors duration-300">livestock</a>
                                 </li>
 
-                                <li><a href="#"
+                                <li><a href="#About-us"
                                         class="text-white nav-link px-2 hover:!text-[#7bc05a] transition-colors duration-300">About</a>
                                 </li>
                             </ul>
@@ -206,6 +206,109 @@ if (empty($heroes)) {
             <?php endwhile; ?>
         </div>
     </div>
+
+    <!-- What We Believe Section -->
+    <section class="py-20 my-20 relative overflow-hidden min-h-[60vh]"
+        style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1500595046743-cd271d694d30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80') center/cover;">
+        <div class="container mx-auto px-6 h-full flex items-center justify-center">
+            <div class="text-center text-white max-w-4xl">
+                <h2 class="text-6xl font-bold mb-6 text-white" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">
+                    What We Believe
+                </h2>
+                <p class="text-xl mb-6 leading-relaxed" style="text-shadow: 1px 1px 3px rgba(0,0,0,0.7);">
+                    "We focus on quality products by ensuring our animals are healthy and happy.
+                    This commitment reflects in the superior taste and tenderness of our meat."
+                </p>
+                <p class="text-base mb-6 italic" style="text-shadow: 1px 1px 2px rgba(0,0,0,0.6);">
+                    "We believe in simple, sustainable farming practices, and when we do this well,
+                    people can taste the difference."
+                </p>
+                <p class="text-[#7bc05a] font-bold text-base" style="text-shadow: 1px 1px 2px rgba(0,0,0,0.8);">
+                    - Booker Livestock
+                </p>
+            </div>
+        </div>
+
+        <!-- Decorative grass overlay at bottom -->
+        <div class="absolute bottom-0 left-0 w-full h-30 z-10"
+            style="background: linear-gradient(to top, rgba(76, 175, 80, 0.3), transparent);">
+        </div>
+        <div class="absolute bottom-0 left-0 w-full h-15 z-20" style="background: url('data:image/svg+xml,<svg xmlns=\"
+            http://www.w3.org/2000/svg\" viewBox=\"0 0 100 20\" fill=\"%23228B22\" opacity=\"0.4\">
+            <path d=\"M0,20 Q25,0 50,20 T100,20 L100,20 L0,20 Z\" /></svg>') repeat-x bottom;">
+        </div>
+    </section>
+
+    <!-- About Us Section -->
+    <section class="py-20 bg-gray-50" id="About-us">
+        <div class="container mx-auto px-6">
+            <h1 class="text-9xl font-bold !text-[#7bc05a] !mb-10">Booker Livestock</h1>
+            <div class=" grid lg:grid-cols-2 gap-12 items-center ">
+                <!-- Left Column - Content -->
+                <div class="space-y-6">
+                    <p class="text-lg text-gray-600 leading-relaxed">
+                        เราคือกลุ่มผู้เชี่ยวชาญด้านการจัดการปศุสัตว์ที่มีประสบการณ์กว่า 15 ปี
+                        ในการเลี้ยงดู ดูแล และจัดจำหน่ายสัตว์คุณภาพสูง
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-6 py-6">
+                        <div class="text-center">
+                            <h3 class="text-4xl font-bold text-[#7bc05a] mb-2">500+</h3>
+                            <p class="text-gray-500">สัตว์ที่ดูแล</p>
+                        </div>
+                        <div class="text-center">
+                            <h3 class="text-4xl font-bold text-[#7bc05a] mb-2">15+</h3>
+                            <p class="text-gray-500">ปีประสบการณ์</p>
+                        </div>
+                        <div class="text-center">
+                            <h3 class="text-4xl font-bold text-[#7bc05a] mb-2">100%</h3>
+                            <p class="text-gray-500">คุณภาพธรรมชาติ</p>
+                        </div>
+                        <div class="text-center">
+                            <h3 class="text-4xl font-bold text-[#7bc05a] mb-2">1000+</h3>
+                            <p class="text-gray-500">ลูกค้าที่พึงพอใจ</p>
+                        </div>
+                    </div>
+
+                    <div class="space-y-4">
+                        <h4 class="text-xl font-bold text-gray-800">บริการของเรา</h4>
+                        <ul class="space-y-3">
+                            <li class="flex items-center space-x-3">
+                                <i class="fa-solid fa-check text-[#7bc05a] text-lg"></i>
+                                <span class="text-gray-700">การเลี้ยงดูสัตว์แบบธรรมชาติ</span>
+                            </li>
+                            <li class="flex items-center space-x-3">
+                                <i class="fa-solid fa-check text-[#7bc05a] text-lg"></i>
+                                <span class="text-gray-700">ตรวจสุขภาพสัตว์อย่างสม่ำเสมอ</span>
+                            </li>
+                            <li class="flex items-center space-x-3">
+                                <i class="fa-solid fa-check text-[#7bc05a] text-lg"></i>
+                                <span class="text-gray-700">จำหน่ายเนื้อสดคุณภาพสูง</span>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                </div>
+
+                <!-- Right Column - Image -->
+                <div class="relative">
+                    <img src="https://images.unsplash.com/photo-1560493676-04071c5f467b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80"
+                        alt="Farm and Livestock" class="w-full h-96 object-cover rounded-2xl shadow-2xl">
+
+                    <!-- Overlay Badge -->
+                    <div class="absolute top-4 right-4">
+                        <div
+                            class="bg-[#7bc05a] text-white px-4 py-2 rounded-full shadow-lg flex items-center space-x-2">
+                            <i class="fa-solid fa-award"></i>
+                            <span class="text-sm font-bold">มาตรฐานสูง</span>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
 
     <footer class="bg-dark text-white text-center py-3 mt-5">
         <p>&copy; <?= date("Y") ?> ระบบจัดการปศุสัตว์</p>
