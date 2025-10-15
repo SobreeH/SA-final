@@ -79,7 +79,7 @@ if (empty($heroes)) {
 
     <!-- Navbar -->
     <nav class="fixed-top w-full z-50">
-        <div class="bg-green-600/80 backdrop-blur-lg border-b border-white/20 shadow-xl">
+        <div class="bg-[#262423]/90 backdrop-blur-lg border-b border-white/20 shadow-2xl">
             <div class="container-fluid px-6 py-3">
                 <div class="flex items-center justify-between">
                     <div class="flex items-center space-x-8">
@@ -93,23 +93,34 @@ if (empty($heroes)) {
                         <div class="search">
                             <form class="flex" method="get" action="">
                                 <input
-                                    class="px-4 py-2 rounded-l-lg bg-white/20 backdrop-blur-md border border-white/30 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-white/50 focus:border-white/60 transition-all duration-300 shadow-lg w-64"
+                                    class="px-4 py-2 rounded-l-lg bg-white/10 backdrop-blur-md border border-white/30 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-[#7bc05a]/50 focus:border-[#7bc05a]/60 hover:bg-white/20 transition-all duration-300 shadow-lg w-64"
                                     type="search" name="q" placeholder="ค้นหา..."
                                     value="<?= htmlspecialchars($search) ?>">
                                 <button
-                                    class="px-4 py-2 rounded-r-lg bg-white/30 backdrop-blur-md border border-white/30 border-l-0 text-white hover:bg-white/40 transition-all duration-300 shadow-lg"
+                                    class="px-4 py-2 rounded-r-lg bg-[#7bc05a]/20 backdrop-blur-md border border-[#7bc05a]/40 border-l-0 text-white hover:bg-[#7bc05a]/30 hover:text-white transition-all duration-300 shadow-lg"
                                     type="submit">
                                     <i class="fa-solid fa-magnifying-glass"></i>
                                 </button>
                             </form>
                         </div>
                         <div class="menu">
-                            <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 space-x-6">
-                                <li><a href="#" class="nav-link px-2 text-white">Home</a></li>
-                                <li><a href="#" class="nav-link px-2 text-white">Features</a></li>
-                                <li><a href="#" class="nav-link px-2 text-white">Pricing</a></li>
-                                <li><a href="#" class="nav-link px-2 text-white">FAQs</a></li>
-                                <li><a href="#" class="nav-link px-2 text-white">About</a></li>
+                            <ul
+                                class=" flex col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0 space-x-6">
+                                <li><a href="#"
+                                        class="text-white nav-link px-2 hover:!text-[#7bc05a] transition-colors duration-300">Home</a>
+                                </li>
+                                <li><a href="#"
+                                        class="text-white nav-link px-2 hover:!text-[#7bc05a] transition-colors duration-300">Features</a>
+                                </li>
+                                <li><a href="#livestock-list"
+                                        class="text-white nav-link px-2 hover:!text-[#7bc05a] transition-colors duration-300">livestock</a>
+                                </li>
+                                <li><a href="#"
+                                        class="text-white nav-link px-2 hover:!text-[#7bc05a] transition-colors duration-300">FAQs</a>
+                                </li>
+                                <li><a href="#"
+                                        class="text-white nav-link px-2 hover:!text-[#7bc05a] transition-colors duration-300">About</a>
+                                </li>
                             </ul>
                         </div>
 
@@ -117,46 +128,63 @@ if (empty($heroes)) {
 
                     <div class="flex items-center space-x-3">
                         <a href="login.php"
-                            class="px-4 py-2 rounded-lg bg-white/20 backdrop-blur-md border border-white/30 text-white hover:bg-white/30 transition-all duration-300 shadow-lg font-medium">ล็อกอิน</a>
+                            class="!text-[#7bc05a] !border-[#7bc05a] text-decoration-none !bg-transparent px-4 py-2 rounded-lg border hover:backdrop-blur-md transition-all duration-200 shadow-lg font-medium">ล็อกอิน</a>
                         <a href="register.php"
-                            class="px-4 py-2 rounded-lg bg-transparent border-2 border-white/40 text-white hover:bg-white/20 hover:backdrop-blur-md transition-all duration-300 shadow-lg font-medium">สมัครสมาชิก</a>
+                            class="hover:!text-[#7bc05a] hover:!border-[#7bc05a] text-decoration-none px-4 py-2 rounded-lg bg-transparent border-2 border-white/40 text-white hover:backdrop-blur-md transition-all duration-200 shadow-lg font-medium">สมัครสมาชิก</a>
                     </div>
                 </div>
             </div>
         </div>
     </nav>
 
-    <div style="margin-top: 70px;"></div>
-
-    <!-- Hero Carousel (แสดงรูปด้วย) -->
-    <div class="container my-4">
-        <div id="heroCarousel" class="carousel slide " data-bs-ride="carousel">
-            <div class="carousel-inner">
+    <!-- Hero Carousel (แสดงรูปด้วย) - Full Screen -->
+    <div class="w-100" style="height: 100vh; margin-top: 70px;">
+        <div id="heroCarousel" class="carousel slide h-100" data-bs-ride="carousel" data-bs-interval="5000">
+            <!-- Carousel Indicators -->
+            <div class="carousel-indicators" style="z-index: 15;">
                 <?php foreach ($heroes as $i => $l): ?>
-                <div class="carousel-item <?= $i===0 ? 'active' : '' ?>">
+                <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="<?= $i ?>"
+                    <?= $i===0 ? 'class="active" aria-current="true"' : '' ?> aria-label="Slide <?= $i + 1 ?>"></button>
+                <?php endforeach; ?>
+            </div>
+
+            <div class="carousel-inner h-100">
+                <?php foreach ($heroes as $i => $l): ?>
+                <div class="carousel-item h-100 <?= $i===0 ? 'active' : '' ?>" style="position: relative;">
                     <img src="<?= htmlspecialchars($l['image_resolved']) ?>"
-                        alt="<?= htmlspecialchars($l['tag_number']) ?>" class="d-block w-100"
-                        style="height:300px; object-fit:cover;"
-                        onerror="this.onerror=null;this.src='farmer/uploads/default.jpg';">
-                    <div class="carousel-caption d-none d-md-block">
-                        <h5><?= htmlspecialchars($l['tag_number']) ?> - <?= htmlspecialchars($l['type']) ?></h5>
-                        <p><?= htmlspecialchars($l['breed']) ?>
+                        alt="<?= htmlspecialchars($l['tag_number']) ?>" class="d-block w-100 h-100"
+                        style="object-fit:cover;" onerror="this.onerror=null;this.src='farmer/uploads/default.jpg';">
+                    <!-- Black Overlay -->
+                    <div class="position-absolute top-0 start-0 w-100 h-100"
+                        style="background-color: rgba(0, 0, 0, 0.5); z-index: 1;"></div>
+                    <!-- Text Content -->
+                    <div class="position-absolute top-50 start-50 translate-middle text-center text-white w-100"
+                        style="z-index: 10; padding: 0 20px;">
+                        <h1 class="display-4 fw-bold mb-3" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">
+                            Discover Our Freshest Meat</h1>
+                        <p class="fs-4 mb-4" style="text-shadow: 1px 1px 2px rgba(0,0,0,0.8);">
+                            <?= htmlspecialchars($l['breed']) ?>
                             <?= !empty($l['weight']) ? '| '.htmlspecialchars($l['weight']).' kg' : '' ?></p>
+                        <a href="#livestock-list" class="btn btn-success btn-lg px-5 py-3">ดูรายการสัตว์</a>
                     </div>
                 </div>
                 <?php endforeach; ?>
             </div>
-            <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev">
-                <span class="carousel-control-prev-icon"></span>
+            <button class="carousel-control-prev" type="button" data-bs-target="#heroCarousel" data-bs-slide="prev"
+                style="z-index: 15;">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Previous</span>
             </button>
-            <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next">
-                <span class="carousel-control-next-icon"></span>
+            <button class="carousel-control-next" type="button" data-bs-target="#heroCarousel" data-bs-slide="next"
+                style="z-index: 15;">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Next</span>
             </button>
         </div>
     </div>
 
     <!-- Livestock List -->
-    <div class="container my-5">
+    <div class="container my-5" id="livestock-list">
         <h2 class="mb-4">รายการสัตว์พร้อมขาย</h2>
         <div class="row g-4">
             <?php while ($row = $result->fetch_assoc()): ?>
@@ -174,7 +202,8 @@ if (empty($heroes)) {
                         <p class="mb-1">ชนิด: <?= htmlspecialchars($row['type']) ?></p>
                         <p class="mb-1">สายพันธุ์: <?= htmlspecialchars($row['breed']) ?></p>
                         <p class="mb-3">น้ำหนัก: <?= htmlspecialchars($row['weight']) ?> กก.</p>
-                        <a href="#" class="btn btn-success mt-auto">รายละเอียด</a>
+                        <a href="detail.php?livestock_id=<?= (int)$row['livestock_id'] ?>"
+                            class="btn btn-success mt-auto">รายละเอียด</a>
                     </div>
                 </div>
             </div>
