@@ -121,7 +121,7 @@ button:hover{background:var(--primary-600);} button:active{transform:translateY(
 </style>
 </head>
 <body>
-<a id="dashboardBtn" href="farmer_dashboard.php">Dashboard</a>
+<a id="dashboardBtn" href="farmer_livestock.php">Dashboard</a>
 <div class="container">
   <h2>แก้ไขปศุสัตว์</h2>
   <div class="form-card">
