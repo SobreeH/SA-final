@@ -84,9 +84,7 @@ $vets = $conn->query("SELECT * FROM Veterinarian");
 <body class="bg-light">
 <div class="container mt-4">
     <h3 class="text-center mb-4">Admin Dashboard - Manage Users</h3>
-    <a href="../logout.php" class="btn btn-danger mb-3">Logout</a>
-    <a href="admin_dashboard.php" class="btn btn-success mb-3">Dashboard</a>
-
+<a href="admin_dashboard.php" class="btn btn-secondary">⬅ Back to Dashboard</a>
     <!-- FARMERS -->
     <div class="card mb-4">
         <div class="card-header bg-success text-white">Farmers</div>
