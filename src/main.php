@@ -109,15 +109,11 @@ if (empty($heroes)) {
                                 <li><a href="#"
                                         class="text-white nav-link px-2 hover:!text-[#7bc05a] transition-colors duration-300">Home</a>
                                 </li>
-                                <li><a href="#"
-                                        class="text-white nav-link px-2 hover:!text-[#7bc05a] transition-colors duration-300">Features</a>
-                                </li>
+
                                 <li><a href="#livestock-list"
                                         class="text-white nav-link px-2 hover:!text-[#7bc05a] transition-colors duration-300">livestock</a>
                                 </li>
-                                <li><a href="#"
-                                        class="text-white nav-link px-2 hover:!text-[#7bc05a] transition-colors duration-300">FAQs</a>
-                                </li>
+
                                 <li><a href="#"
                                         class="text-white nav-link px-2 hover:!text-[#7bc05a] transition-colors duration-300">About</a>
                                 </li>
