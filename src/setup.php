@@ -200,30 +200,30 @@ function generateTag($type,$num){
 }
 
 $livestock_data = [
-    ['cow','Angus','male',500.5,'available','https://placehold.co/600x400?text=Cow'],
-    ['cow','Holstein','female',610.8,'available','https://placehold.co/600x400?text=Cow'],
-    ['cow','Brahman','male',520.1,'available','https://placehold.co/600x400?text=Cow'],
-    ['cow','Charolais','female',705.25,'sold','https://placehold.co/600x400?text=Cow'],
-    ['cow','Angus','male',580,'available','https://placehold.co/600x400?text=Cow'],
-    ['chicken','Leghorn','female',2.1,'available','https://placehold.co/600x400?text=Chicken'],
-    ['chicken','Rhode Island Red','male',2.45,'available','https://placehold.co/600x400?text=Chicken'],
-    ['chicken','Plymouth Rock','female',2.8,'sold','https://placehold.co/600x400?text=Chicken'],
-    ['chicken','Sussex','female',2.3,'available','https://placehold.co/600x400?text=Chicken'],
-    ['goat','Boer','male',52.3,'available','https://placehold.co/600x400?text=Goat'],
-    ['goat','Kiko','female',48.75,'sold','https://placehold.co/600x400?text=Goat'],
-    ['goat','Saanen','male',55,'available','https://placehold.co/600x400?text=Goat'],
-    ['cow','Simmental','female',600,'available','https://placehold.co/600x400?text=Cow']
+    ['cow','Angus','male',500.5,'available'],
+    ['cow','Holstein','female',610.8,'available'],
+    ['cow','Brahman','male',520.1,'available'],
+    ['cow','Charolais','female',705.25,'sold'],
+    ['cow','Angus','male',580,'available'],
+    ['chicken','Leghorn','female',2.1,'available'],
+    ['chicken','Rhode Island Red','male',2.45,'available'],
+    ['chicken','Plymouth Rock','female',2.8,'sold'],
+    ['chicken','Sussex','female',2.3,'available'],
+    ['goat','Boer','male',52.3,'available'],
+    ['goat','Kiko','female',48.75,'sold'],
+    ['goat','Saanen','male',55,'available'],
+    ['cow','Simmental','female',600,'available']
 ];
 
 $index_cow = 1; $index_chicken = 1; $index_goat = 1;
 $livestockStmt = $conn->prepare("INSERT IGNORE INTO Livestock (tag_number,type,breed,gender,weight,status,image) VALUES (?,?,?,?,?,?,?)");
 
 foreach($livestock_data as $l){
-    list($type,$breed,$gender,$weight,$status,$image) = $l;
+    list($type,$breed,$gender,$weight,$status) = $l;
     switch($type){
-        case 'cow': $tag = generateTag($type,$index_cow++); break;
-        case 'chicken': $tag = generateTag($type,$index_chicken++); break;
-        case 'goat': $tag = generateTag($type,$index_goat++); break;
+        case 'cow': $tag = generateTag($type,$index_cow++); $image = 'farmer/uploads/cow.png'; break;
+        case 'chicken': $tag = generateTag($type,$index_chicken++); $image = 'farmer/uploads/chicken.png'; break;
+        case 'goat': $tag = generateTag($type,$index_goat++); $image = 'farmer/uploads/goat.png'; break;
     }
     $livestockStmt->bind_param("ssssdss",$tag,$type,$breed,$gender,$weight,$status,$image);
     $livestockStmt->execute();
