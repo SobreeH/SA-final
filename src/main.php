@@ -161,7 +161,8 @@ if (empty($heroes)) {
                         <p class="fs-4 mb-4" style="text-shadow: 1px 1px 2px rgba(0,0,0,0.8);">
                             <?= htmlspecialchars($l['breed']) ?>
                             <?= !empty($l['weight']) ? '| '.htmlspecialchars($l['weight']).' kg' : '' ?></p>
-                        <a href="#livestock-list" class="btn btn-success btn-lg px-5 py-3">ดูรายการสัตว์</a>
+                        <a href="#livestock-list"
+                            class="btn btn-success btn-lg px-5 py-3 hover:!bg-[#367723] btn text-white !bg-[#3c8527] !border-t-5 !border-b-5 !border-t-[#52a535] !border-b-[#2a641c] mt-auto !rounded-none">ดูรายการสัตว์</a>
                     </div>
                 </div>
                 <?php endforeach; ?>
@@ -200,7 +201,7 @@ if (empty($heroes)) {
                         <p class="mb-1">สายพันธุ์: <?= htmlspecialchars($row['breed']) ?></p>
                         <p class="mb-3">น้ำหนัก: <?= htmlspecialchars($row['weight']) ?> กก.</p>
                         <a href="detail.php?livestock_id=<?= (int)$row['livestock_id'] ?>"
-                            class=" hover:!bg-[#367723] btn text-white !bg-[#3c8527] !border-t-5 !border-b-5 !border-t-[#52a535] !border-b-[#2a641c] mt-auto !rounded-none">รายละเอียด</a>
+                            class="btn hover:!bg-[#367723]  text-white !bg-[#3c8527] !border-t-5 !border-b-5 !border-t-[#52a535] !border-b-[#2a641c] !rounded-none  mt-auto !rounded-none">รายละเอียด</a>
                     </div>
                 </div>
             </div>
@@ -246,45 +247,45 @@ if (empty($heroes)) {
             <h1 class="text-9xl font-bold !text-[#7bc05a] !mb-10">Booker Livestock</h1>
             <div class=" grid lg:grid-cols-2 gap-12 items-center ">
                 <!-- Left Column - Content -->
-                <div class="space-y-6 text-white">
-                    <p class="text-lg  leading-relaxed">
+                <div class="space-y-6 ">
+                    <p class="text-lg  leading-relaxed !text-[#ede5e2]">
                         เราคือกลุ่มผู้เชี่ยวชาญด้านการจัดการปศุสัตว์ที่มีประสบการณ์กว่า 15 ปี
                         ในการเลี้ยงดู ดูแล และจัดจำหน่ายสัตว์คุณภาพสูง
                     </p>
 
                     <div class="grid grid-cols-2 gap-6 py-6">
                         <div class="text-center">
-                            <h3 class="text-4xl font-bold text-[#7bc05a] mb-2">500+</h3>
-                            <p class="text-gray-500">สัตว์ที่ดูแล</p>
+                            <h3 class="text-4xl font-bold !text-[#ede5e2] mb-2">500+</h3>
+                            <p class="!text-[#d0c5c0]">สัตว์ที่ดูแล</p>
                         </div>
                         <div class="text-center">
-                            <h3 class="text-4xl font-bold text-[#7bc05a] mb-2">15+</h3>
-                            <p class="text-gray-500">ปีประสบการณ์</p>
+                            <h3 class="text-4xl font-bold !text-[#ede5e2] mb-2">15+</h3>
+                            <p class="!text-[#d0c5c0]">ปีประสบการณ์</p>
                         </div>
                         <div class="text-center">
-                            <h3 class="text-4xl font-bold text-[#7bc05a] mb-2">100%</h3>
-                            <p class="text-gray-500">คุณภาพธรรมชาติ</p>
+                            <h3 class="text-4xl font-bold !text-[#ede5e2] mb-2">100%</h3>
+                            <p class="!text-[#d0c5c0]">คุณภาพธรรมชาติ</p>
                         </div>
                         <div class="text-center">
-                            <h3 class="text-4xl font-bold text-[#7bc05a] mb-2">1000+</h3>
-                            <p class="text-gray-500">ลูกค้าที่พึงพอใจ</p>
+                            <h3 class="text-4xl font-bold !text-[#ede5e2] mb-2">1000+</h3>
+                            <p class="!text-[#d0c5c0]">ลูกค้าที่พึงพอใจ</p>
                         </div>
                     </div>
 
                     <div class="space-y-4">
-                        <h4 class="text-xl font-bold ">บริการของเรา</h4>
+                        <h4 class="text-xl font-bold !text-[#ede5e2] ">บริการของเรา</h4>
                         <ul class="space-y-3">
                             <li class="flex items-center space-x-3">
                                 <i class="fa-solid fa-check text-[#7bc05a] text-lg"></i>
-                                <span>การเลี้ยงดูสัตว์แบบธรรมชาติ</span>
+                                <span class="!text-[#d0c5c0]">การเลี้ยงดูสัตว์แบบธรรมชาติ</span>
                             </li>
                             <li class="flex items-center space-x-3">
                                 <i class="fa-solid fa-check text-[#7bc05a] text-lg"></i>
-                                <span>ตรวจสุขภาพสัตว์อย่างสม่ำเสมอ</span>
+                                <span class="!text-[#d0c5c0]">ตรวจสุขภาพสัตว์อย่างสม่ำเสมอ</span>
                             </li>
                             <li class="flex items-center space-x-3">
                                 <i class="fa-solid fa-check text-[#7bc05a] text-lg"></i>
-                                <span>จำหน่ายเนื้อสดคุณภาพสูง</span>
+                                <span class="!text-[#d0c5c0]">จำหน่ายเนื้อสดคุณภาพสูง</span>
                             </li>
 
                         </ul>
