@@ -117,7 +117,7 @@ $breed = $sb->get_result();
     </style>
 </head>
 
-<body>
+<body class="!mt-20">
     <nav class="fixed-top w-full z-50">
         <div class="bg-[#262423]/90 backdrop-blur-lg border-b border-white/20 shadow-2xl">
             <div class="container-fluid px-6 py-3">

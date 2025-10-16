@@ -75,7 +75,7 @@ if (empty($heroes)) {
     </style>
 </head>
 
-<body class="bg-light">
+<body class="!bg-[#171615]">
 
     <!-- Navbar -->
     <nav class="fixed-top w-full z-50">
@@ -180,7 +180,7 @@ if (empty($heroes)) {
     </div>
 
     <!-- Livestock List -->
-    <div class="container my-5" id="livestock-list">
+    <div class="container my-5 text-white" id="livestock-list">
         <h2 class="mb-4">รายการสัตว์พร้อมขาย</h2>
         <div class="row g-4">
             <?php while ($row = $result->fetch_assoc()): ?>
@@ -188,18 +188,19 @@ if (empty($heroes)) {
         $img = resolve_image($row['image'] ?? '');
         
       ?>
-            <div class="col-12 col-md-4 col-lg-3">
-                <div class="card shadow-sm h-100 border border-indigo-600">
+            <div class="col-12 col-md-4 col-lg-3 ">
+                <div
+                    class="card !rounded-none h-100 !border-t-4 !border-r-4 !border-b-4 !border-l-4 !border-t-[#3d3938] !border-r-[#3d3938] !border-b-[#000] !border-l-[#000]">
                     <img src="<?= htmlspecialchars($img) ?>" class="card-img-top"
                         alt="<?= htmlspecialchars($row['tag_number']) ?>" style="object-fit: cover; height: 180px;"
                         onerror="this.onerror=null;this.src='farmer/uploads/default.jpg';">
-                    <div class="card-body d-flex flex-column">
+                    <div class="card-body d-flex flex-column !bg-[#312f2e] text-white">
                         <h5 class="card-title"><?= htmlspecialchars($row['tag_number']) ?></h5>
                         <p class="mb-1">ชนิด: <?= htmlspecialchars($row['type']) ?></p>
                         <p class="mb-1">สายพันธุ์: <?= htmlspecialchars($row['breed']) ?></p>
                         <p class="mb-3">น้ำหนัก: <?= htmlspecialchars($row['weight']) ?> กก.</p>
                         <a href="detail.php?livestock_id=<?= (int)$row['livestock_id'] ?>"
-                            class="btn btn-success mt-auto">รายละเอียด</a>
+                            class=" hover:!bg-[#367723] btn text-white !bg-[#3c8527] !border-t-5 !border-b-5 !border-t-[#52a535] !border-b-[#2a641c] mt-auto !rounded-none">รายละเอียด</a>
                     </div>
                 </div>
             </div>
@@ -212,18 +213,18 @@ if (empty($heroes)) {
         style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1500595046743-cd271d694d30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80') center/cover;">
         <div class="container mx-auto px-6 h-full flex items-center justify-center">
             <div class="text-center text-white max-w-4xl">
-                <h2 class="text-6xl font-bold mb-6 text-white" style="text-shadow: 2px 2px 4px rgba(0,0,0,0.8);">
+                <h2 class="text-6xl font-bold mb-6 text-white text-shadow-[2px_2px_4px_rgba(0,0,0,0.8)]">
                     What We Believe
                 </h2>
-                <p class="text-xl mb-6 leading-relaxed" style="text-shadow: 1px 1px 3px rgba(0,0,0,0.7);">
+                <p class="text-xl mb-6 leading-relaxed text-shadow-[1px_1px_3px_rgba(0,0,0,0.7)]">
                     "We focus on quality products by ensuring our animals are healthy and happy.
                     This commitment reflects in the superior taste and tenderness of our meat."
                 </p>
-                <p class="text-base mb-6 italic" style="text-shadow: 1px 1px 2px rgba(0,0,0,0.6);">
+                <p class="text-base mb-6 italic text-shadow-[1px_1px_2px_rgba(0,0,0,0.6)]">
                     "We believe in simple, sustainable farming practices, and when we do this well,
                     people can taste the difference."
                 </p>
-                <p class="text-[#7bc05a] font-bold text-base" style="text-shadow: 1px 1px 2px rgba(0,0,0,0.8);">
+                <p class="text-[#7bc05a] font-bold text-base text-shadow-[1px_1px_2px_rgba(0,0,0,0.8)]">
                     - Booker Livestock
                 </p>
             </div>
@@ -233,20 +234,20 @@ if (empty($heroes)) {
         <div class="absolute bottom-0 left-0 w-full h-30 z-10"
             style="background: linear-gradient(to top, rgba(76, 175, 80, 0.3), transparent);">
         </div>
-        <div class="absolute bottom-0 left-0 w-full h-15 z-20" style="background: url('data:image/svg+xml,<svg xmlns=\"
-            http://www.w3.org/2000/svg\" viewBox=\"0 0 100 20\" fill=\"%23228B22\" opacity=\"0.4\">
-            <path d=\"M0,20 Q25,0 50,20 T100,20 L100,20 L0,20 Z\" /></svg>') repeat-x bottom;">
-        </div>
     </section>
 
+
+
     <!-- About Us Section -->
-    <section class="py-20 bg-gray-50" id="About-us">
+    <section
+        class=" mx-15 my-20 py-20 bg-[#0e0d0d] !border-t-4 !border-r-4 !border-b-4 !border-l-4 !border-t-black !border-r-black !border-b-[#272626] !border-l-[#272626] "
+        id="About-us">
         <div class="container mx-auto px-6">
             <h1 class="text-9xl font-bold !text-[#7bc05a] !mb-10">Booker Livestock</h1>
             <div class=" grid lg:grid-cols-2 gap-12 items-center ">
                 <!-- Left Column - Content -->
-                <div class="space-y-6">
-                    <p class="text-lg text-gray-600 leading-relaxed">
+                <div class="space-y-6 text-white">
+                    <p class="text-lg  leading-relaxed">
                         เราคือกลุ่มผู้เชี่ยวชาญด้านการจัดการปศุสัตว์ที่มีประสบการณ์กว่า 15 ปี
                         ในการเลี้ยงดู ดูแล และจัดจำหน่ายสัตว์คุณภาพสูง
                     </p>
@@ -271,19 +272,19 @@ if (empty($heroes)) {
                     </div>
 
                     <div class="space-y-4">
-                        <h4 class="text-xl font-bold text-gray-800">บริการของเรา</h4>
+                        <h4 class="text-xl font-bold ">บริการของเรา</h4>
                         <ul class="space-y-3">
                             <li class="flex items-center space-x-3">
                                 <i class="fa-solid fa-check text-[#7bc05a] text-lg"></i>
-                                <span class="text-gray-700">การเลี้ยงดูสัตว์แบบธรรมชาติ</span>
+                                <span>การเลี้ยงดูสัตว์แบบธรรมชาติ</span>
                             </li>
                             <li class="flex items-center space-x-3">
                                 <i class="fa-solid fa-check text-[#7bc05a] text-lg"></i>
-                                <span class="text-gray-700">ตรวจสุขภาพสัตว์อย่างสม่ำเสมอ</span>
+                                <span>ตรวจสุขภาพสัตว์อย่างสม่ำเสมอ</span>
                             </li>
                             <li class="flex items-center space-x-3">
                                 <i class="fa-solid fa-check text-[#7bc05a] text-lg"></i>
-                                <span class="text-gray-700">จำหน่ายเนื้อสดคุณภาพสูง</span>
+                                <span>จำหน่ายเนื้อสดคุณภาพสูง</span>
                             </li>
 
                         </ul>
