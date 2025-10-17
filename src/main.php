@@ -114,6 +114,11 @@ if (empty($heroes)) {
                                         class="text-white nav-link px-2 hover:!text-[#7bc05a] transition-colors duration-300">livestock</a>
                                 </li>
 
+                                <li><a href="#what-we-believe"
+                                        class="text-white nav-link px-2 hover:!text-[#7bc05a] transition-colors duration-300">What
+                                        We Believe</a>
+                                </li>
+
                                 <li><a href="#About-us"
                                         class="text-white nav-link px-2 hover:!text-[#7bc05a] transition-colors duration-300">About</a>
                                 </li>
@@ -210,7 +215,7 @@ if (empty($heroes)) {
     </div>
 
     <!-- What We Believe Section -->
-    <section class="py-20 my-20 relative overflow-hidden min-h-[60vh]"
+    <section id="what-we-believe" class="py-20 my-20 relative overflow-hidden min-h-[60vh]"
         style="background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1500595046743-cd271d694d30?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2074&q=80') center/cover;">
         <div class="container mx-auto px-6 h-full flex items-center justify-center">
             <div class="text-center text-white max-w-4xl">
