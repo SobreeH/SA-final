@@ -87,119 +87,306 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 ?>
 <!DOCTYPE html>
 <html lang="th">
+
 <head>
-<meta charset="UTF-8">
-<title>แก้ไขปศุสัตว์</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<style>
-/* --- same styles as insert page --- */
-:root{
-  --bg:#f7f9fb; --card:#fff; --text:#1f2937; --muted:#6b7280;
-  --primary:#16a34a; --primary-600:#15803d; --ring:#a7f3d0; --border:#e5e7eb; --danger:#ef4444;
-}
-*{box-sizing:border-box}
-body{margin:0;font-family:system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial;background:var(--bg);color:var(--text);}
-.container{max-width:760px;margin:48px auto;padding:0 16px;}
-h2{margin:0 0 16px 0;font-weight:700;}
-.form-card{background:var(--card);border:1px solid var(--border);border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.06);padding:24px;}
-form label{display:block;font-weight:600;margin:14px 0 6px;color:var(--text);}
-input[type=text], input[type=number], input[type=url], select, input[type=file]{width:100%;border:1px solid var(--border);border-radius:10px;padding:12px 14px;font-size:16px;background:#fff;color:var(--text);transition: box-shadow .15s ease,border-color .15s ease;}
-input:focus, select:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 4px var(--ring);}
-input[type=file]{padding:10px;}
-.grid{display:grid;gap:14px;}
-@media (min-width:640px){.grid-2{grid-template-columns:1fr 1fr}.grid-3{grid-template-columns:1fr 1fr 1fr}}
-@media (max-width:640px){.grid-2,.grid-3{grid-template-columns:1fr !important;} button[type=submit]{font-size:1rem;padding:10px;}}
-button[type=submit]{appearance:none;border:none;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;padding:12px 16px;border-radius:12px;font-weight:700;font-size:16px;background:var(--primary);color:#fff;width:100%;transition: transform .05s ease, background .2s ease;margin-top:16px;}
-button:hover{background:var(--primary-600);} button:active{transform:translateY(1px);}
-.link-back{display:inline-block;margin-top:12px;color:var(--primary);text-decoration:none;font-weight:600;}
-.link-back:hover{text-decoration:underline;}
-.alert{padding:12px 14px;border-radius:10px;margin-bottom:14px;font-weight:600;}
-.alert-danger{background:#fee2e2;color:#991b1b;border:1px solid #fecaca;}
-.alert-success{background:#dcfce7;color:#14532d;border:1px solid #bbf7d0;}
-.preview{width:100%;height:220px;border:1px dashed var(--border);border-radius:12px;display:flex;align-items:center;justify-content:center;color:var(--muted);background:#fff;margin-top:6px;background-size:cover;background-position:center;}
-#dashboardBtn{position:fixed;top:10px;left:10px;background:var(--primary);color:#fff;padding:10px 14px;border-radius:8px;text-decoration:none;z-index:1000;}
-</style>
+    <meta charset="UTF-8">
+    <title>แก้ไขปศุสัตว์</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+    /* --- same styles as insert page --- */
+    :root {
+        --bg: #f7f9fb;
+        --card: #fff;
+        --text: #1f2937;
+        --muted: #6b7280;
+        --primary: #16a34a;
+        --primary-600: #15803d;
+        --ring: #a7f3d0;
+        --border: #e5e7eb;
+        --danger: #ef4444;
+    }
+
+    * {
+        box-sizing: border-box
+    }
+
+    body {
+        margin: 0;
+        font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+        background: var(--bg);
+        color: var(--text);
+    }
+
+    .container {
+        max-width: 760px;
+        margin: 48px auto;
+        padding: 0 16px;
+    }
+
+    h2 {
+        margin: 0 0 16px 0;
+        font-weight: 700;
+    }
+
+    .form-card {
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, .06);
+        padding: 24px;
+    }
+
+    form label {
+        display: block;
+        font-weight: 600;
+        margin: 14px 0 6px;
+    }
+
+    input[type=text],
+    input[type=number],
+    input[type=url],
+    select,
+    input[type=file] {
+        width: 100%;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        padding: 12px 14px;
+        font-size: 16px;
+        background: #fff;
+        color: var(--text);
+        transition: box-shadow .15s ease, border-color .15s ease;
+    }
+
+    input:focus,
+    select:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 4px var(--ring);
+    }
+
+    input[type=file] {
+        padding: 10px;
+    }
+
+    .grid {
+        display: grid;
+        gap: 14px;
+    }
+
+    @media (min-width:640px) {
+        .grid-2 {
+            grid-template-columns: 1fr 1fr
+        }
+
+        .grid-3 {
+            grid-template-columns: 1fr 1fr 1fr
+        }
+    }
+
+    @media (max-width:640px) {
+
+        .grid-2,
+        .grid-3 {
+            grid-template-columns: 1fr !important;
+        }
+
+        button[type=submit] {
+            font-size: 1rem;
+            padding: 10px;
+        }
+    }
+
+    button[type=submit] {
+        appearance: none;
+        border: none;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        padding: 12px 16px;
+        border-radius: 12px;
+        font-weight: 700;
+        font-size: 16px;
+        background: var(--primary);
+        color: #fff;
+        width: 100%;
+        transition: transform .05s ease, background .2s ease;
+        margin-top: 16px;
+    }
+
+    button:hover {
+        background: var(--primary-600);
+    }
+
+    button:active {
+        transform: translateY(1px);
+    }
+
+    .link-back {
+        display: inline-block;
+        margin-top: 12px;
+        color: var(--primary);
+        text-decoration: none;
+        font-weight: 600;
+    }
+
+    .link-back:hover {
+        text-decoration: underline;
+    }
+
+    .alert {
+        padding: 12px 14px;
+        border-radius: 10px;
+        margin-bottom: 14px;
+        font-weight: 600;
+    }
+
+    .alert-danger {
+        background: #fee2e2;
+        color: #991b1b;
+        border: 1px solid #fecaca;
+    }
+
+    .alert-success {
+        background: #dcfce7;
+        color: #14532d;
+        border: 1px solid #bbf7d0;
+    }
+
+    .preview {
+        width: 100%;
+        height: 220px;
+        border: 1px dashed var(--border);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: var(--muted);
+        background: #fff;
+        margin-top: 6px;
+        background-size: cover;
+        background-position: center;
+    }
+
+    #dashboardBtn {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        background: var(--primary);
+        color: #fff;
+        padding: 10px 14px;
+        border-radius: 8px;
+        text-decoration: none;
+        z-index: 1000;
+    }
+    </style>
 </head>
-<body>
-<a id="dashboardBtn" href="farmer_livestock.php">Dashboard</a>
-<div class="container">
-  <h2>แก้ไขปศุสัตว์</h2>
-  <div class="form-card">
-    <form action="farmer_livestock_edit.php?id=<?= $livestock_id ?>" method="post" enctype="multipart/form-data">
-      <label for="tag_number">Tag Number</label>
-      <input type="text" id="tag_number" name="tag_number" value="<?= htmlspecialchars($livestock['tag_number']) ?>" required>
 
-      <div class="grid grid-2">
-        <div>
-          <label for="type">ชนิด</label>
-          <select id="type" name="type" required>
-            <option value="cow" <?= $livestock['type'] === 'cow' ? 'selected' : '' ?>>cow</option>
-            <option value="goat" <?= $livestock['type'] === 'goat' ? 'selected' : '' ?>>goat</option>
-            <option value="chicken" <?= $livestock['type'] === 'chicken' ? 'selected' : '' ?>>chicken</option>
-          </select>
+<body class="!bg-[#171615]">
+    <a id="dashboardBtn" href="farmer_livestock.php"
+        class="hover:!bg-[#367723]  text-white !bg-[#3c8527] !border-t-5 !border-b-5 !border-t-[#52a535] !border-b-[#2a641c] !rounded-none">Dashboard</a>
+    <div class="container">
+        <h2 class="text-white">แก้ไขปศุสัตว์</h2>
+        <div
+            class="form-card !text-white !rounded-none !border-t-4 !border-r-4 !border-b-4 !border-l-4 !border-t-[#3d3938] !border-r-[#3d3938] !border-b-[#000] !border-l-[#000]">
+            <form action="farmer_livestock_edit.php?id=<?= $livestock_id ?>" method="post"
+                enctype="multipart/form-data">
+                <label for="tag_number">Tag Number</label>
+                <input type="text" id="tag_number" name="tag_number"
+                    class=" !border-[#313232] !rounded-none !focus:outline-2 !focus:outline-offset-2 !focus:outline-violet-500 active:bg-violet-700 !bg-[#0e0d0d] !text-[#ede5e2]"
+                    value="<?= htmlspecialchars($livestock['tag_number']) ?>" required>
+
+                <div class="grid grid-2">
+                    <div>
+                        <label for="type">ชนิด</label>
+                        <select id="type" name="type"
+                            class="!bg-[#0e0d0d] !text-[#ede5e2] !border-[#313232] !rounded-none !focus:outline-2 !focus:outline-offset-2 !focus:outline-violet-500 active:bg-violet-700"
+                            required>
+                            <option value="cow" <?= $livestock['type'] === 'cow' ? 'selected' : '' ?>>cow</option>
+                            <option value="goat" <?= $livestock['type'] === 'goat' ? 'selected' : '' ?>>goat</option>
+                            <option value="chicken" <?= $livestock['type'] === 'chicken' ? 'selected' : '' ?>>chicken
+                            </option>
+                        </select>
+                    </div>
+                    <div>
+                        <label for="status">สถานะ</label>
+                        <select id="status" name="status"
+                            class="!bg-[#0e0d0d] !text-[#ede5e2] !border-[#313232] !rounded-none !focus:outline-2 !focus:outline-offset-2 !focus:outline-violet-500 active:bg-violet-700"
+                            required> required>
+                            <option value="available" <?= $livestock['status'] === 'available' ? 'selected' : '' ?>>
+                                available</option>
+                            <option value="sold" <?= $livestock['status'] === 'sold' ? 'selected' : '' ?>>sold</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="grid grid-2">
+                    <div>
+                        <label for="breed">สายพันธุ์</label>
+                        <input type="text" id="breed" name="breed"
+                            class="!bg-[#0e0d0d] !text-[#ede5e2] !border-[#313232] !rounded-none !focus:outline-2 !focus:outline-offset-2 !focus:outline-violet-500 active:bg-violet-700"
+                            value="<?= htmlspecialchars($livestock['breed']) ?>"
+                            placeholder="ตัวอย่าง: Angus / Boer / Leghorn">
+                    </div>
+                    <div>
+                        <label for="weight">น้ำหนัก (กก.)</label>
+                        <input type="number" step="0.01" id="weight" name="weight"
+                            class="!bg-[#0e0d0d] !text-[#ede5e2] !border-[#313232] !rounded-none !focus:outline-2 !focus:outline-offset-2 !focus:outline-violet-500 active:bg-violet-700"
+                            value="<?= htmlspecialchars($livestock['weight']) ?>" placeholder="เช่น 580.5">
+                    </div>
+                </div>
+
+                <div class="grid grid-2">
+                    <div>
+                        <label for="image_url">URL รูปภาพ (ถ้ามี)</label>
+                        <input type="url" id="image_url" name="image_url"
+                            class="!bg-[#0e0d0d] !text-[#ede5e2] !border-[#313232] !rounded-none !focus:outline-2 !focus:outline-offset-2 !focus:outline-violet-500 active:bg-violet-700"
+                            placeholder="https://example.com/image.jpg">
+                        <div class="hint">ถ้ากรอกทั้ง URL และเลือกไฟล์ ระบบจะใช้ไฟล์อัปโหลด</div>
+                    </div>
+                    <div>
+                        <label for="image_file">หรืออัปโหลดรูปภาพ</label>
+                        <input type="file" id="image_file" name="image_file" accept="image/*" class="!bg-[#0e0d0d] !text-[#ede5e2] !border-[#313232]
+                        !rounded-none !focus:outline-2 !focus:outline-offset-2 !focus:outline-violet-500
+                        active:bg-violet-700">
+
+                    </div>
+                </div>
+
+                <?php if ($livestock['image']): ?>
+                <div class="preview !bg-[#0e0d0d] !text-[#ede5e2] rounded-none !border !border-[#313232]"
+                    id="imagePreview" style="background-image:url('<?= htmlspecialchars($livestock['image']) ?>')">
+                </div>
+                <?php else: ?>
+                <div class="preview !bg-[#0e0d0d] !text-[#ede5e2]" id="imagePreview">Preview</div>
+                <?php endif; ?>
+
+                <button type="submit"
+                    class="hover:!bg-[#367723]  text-white !bg-[#3c8527] !border-t-5 !border-b-5 !border-t-[#52a535] !border-b-[#2a641c] !rounded-none">บันทึกการแก้ไข</button>
+            </form>
         </div>
-        <div>
-          <label for="status">สถานะ</label>
-          <select id="status" name="status" required>
-            <option value="available" <?= $livestock['status'] === 'available' ? 'selected' : '' ?>>available</option>
-            <option value="sold" <?= $livestock['status'] === 'sold' ? 'selected' : '' ?>>sold</option>
-          </select>
-        </div>
-      </div>
+    </div>
 
-      <div class="grid grid-2">
-        <div>
-          <label for="breed">สายพันธุ์</label>
-          <input type="text" id="breed" name="breed" value="<?= htmlspecialchars($livestock['breed']) ?>" placeholder="ตัวอย่าง: Angus / Boer / Leghorn">
-        </div>
-        <div>
-          <label for="weight">น้ำหนัก (กก.)</label>
-          <input type="number" step="0.01" id="weight" name="weight" value="<?= htmlspecialchars($livestock['weight']) ?>" placeholder="เช่น 580.5">
-        </div>
-      </div>
+    <script>
+    // Image preview
+    const fileInput = document.getElementById('image_file');
+    const urlInput = document.getElementById('image_url');
+    const preview = document.getElementById('imagePreview');
 
-      <div class="grid grid-2">
-        <div>
-          <label for="image_url">URL รูปภาพ (ถ้ามี)</label>
-          <input type="url" id="image_url" name="image_url" placeholder="https://example.com/image.jpg">
-          <div class="hint">ถ้ากรอกทั้ง URL และเลือกไฟล์ ระบบจะใช้ไฟล์อัปโหลด</div>
-        </div>
-        <div>
-          <label for="image_file">หรืออัปโหลดรูปภาพ</label>
-          <input type="file" id="image_file" name="image_file" accept="image/*">
-        </div>
-      </div>
+    function showPreview(src) {
+        preview.style.backgroundImage = `url(${src})`;
+        preview.textContent = '';
+    }
 
-      <?php if ($livestock['image']): ?>
-        <div class="preview" id="imagePreview" style="background-image:url('<?= htmlspecialchars($livestock['image']) ?>')"></div>
-      <?php else: ?>
-        <div class="preview" id="imagePreview">Preview</div>
-      <?php endif; ?>
+    fileInput.addEventListener('change', () => {
+        const file = fileInput.files[0];
+        if (file) showPreview(URL.createObjectURL(file));
+    });
 
-      <button type="submit">บันทึกการแก้ไข</button>
-    </form>
-  </div>
-</div>
-
-<script>
-// Image preview
-const fileInput = document.getElementById('image_file');
-const urlInput = document.getElementById('image_url');
-const preview = document.getElementById('imagePreview');
-
-function showPreview(src){
-    preview.style.backgroundImage = `url(${src})`;
-    preview.textContent = '';
-}
-
-fileInput.addEventListener('change', ()=>{
-    const file = fileInput.files[0];
-    if(file) showPreview(URL.createObjectURL(file));
-});
-
-urlInput.addEventListener('input', ()=>{
-    if(urlInput.value) showPreview(urlInput.value);
-});
-</script>
+    urlInput.addEventListener('input', () => {
+        if (urlInput.value) showPreview(urlInput.value);
+    });
+    </script>
 </body>
+
 </html>

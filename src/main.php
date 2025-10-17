@@ -191,7 +191,7 @@ if (empty($heroes)) {
       ?>
             <div class="col-12 col-md-4 col-lg-3 ">
                 <div
-                    class="card !rounded-none h-100 !border-t-4 !border-r-4 !border-b-4 !border-l-4 !border-t-[#3d3938] !border-r-[#3d3938] !border-b-[#000] !border-l-[#000]">
+                    class="card h-100 !rounded-none !border-t-4 !border-r-4 !border-b-4 !border-l-4 !border-t-[#3d3938] !border-r-[#3d3938] !border-b-[#000] !border-l-[#000]">
                     <img src="<?= htmlspecialchars($img) ?>" class="card-img-top"
                         alt="<?= htmlspecialchars($row['tag_number']) ?>" style="object-fit: cover; height: 180px;"
                         onerror="this.onerror=null;this.src='farmer/uploads/default.jpg';">

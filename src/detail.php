@@ -237,7 +237,7 @@ $breed = $sb->get_result();
                         <li>
                             <div class="date !text-[#d0c5c0]"><?= h($hrow['treatment_date']) ?></div>
                             <div><?= h($hrow['treatment']) ?></div>
-                            <?php if(!empty($hrow['vet_id'])): ?><div class="!text-[#d0c5c0 ]">(Vet ID:
+                            <?php if(!empty($hrow['vet_id'])): ?><div class="!text-[#d0c5c0]">(Vet ID:
                                 <?= h($hrow['vet_id']) ?>)</div><?php endif; ?>
                         </li>
                         <?php endwhile; endif; ?>
