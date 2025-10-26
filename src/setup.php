@@ -4,9 +4,9 @@
 // Generates full database, tables, and dummy data
 // ================================
 
-$servername = "mariadb";
+$servername = "localhost";
 $username = "root";
-$password = "root";
+$password = "";
 $database = "livestockdb";
 
 // ----------------------
